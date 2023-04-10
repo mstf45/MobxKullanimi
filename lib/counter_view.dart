@@ -8,8 +8,26 @@ class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: buttonAlani,
-      body: bodyAlani,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          bodyAlani,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () => cm.sayacAzalt(),
+                child: const Icon(Icons.remove),
+              ),
+              const SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: () => cm.sayacArttir(),
+                child: const Icon(Icons.add),
+              ),
+            ],
+          ),
+        ],
+      ),
       appBar: AppBar(
         title: const Text('Mobx Kullanımı'),
         centerTitle: true,
@@ -18,20 +36,15 @@ class CounterPage extends StatelessWidget {
   }
 
   Widget get bodyAlani {
-    return Observer(builder: (_) {
-      return Center(
-        child: Text(
-          cm.counter.toString(),
-          style: TextStyle(fontSize: 30),
-        ),
-      );
-    });
-  }
-
-  Widget get buttonAlani {
-    return FloatingActionButton(
-      child: const Icon(Icons.add),
-      onPressed: () => cm.sayacArttir(),
+    return Observer(
+      builder: (_) {
+        return Center(
+          child: Text(
+            cm.counter.toString(),
+            style: const TextStyle(fontSize: 30),
+          ),
+        );
+      },
     );
   }
 }
